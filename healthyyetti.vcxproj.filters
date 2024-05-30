@@ -39,5 +39,11 @@
     <ClCompile Include="05-01 상속기본.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="sangsock.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="05-02 상속예제.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
