@@ -43,4 +43,3 @@ int main(void) {
 	delete stu;
 	return 0;
 }
-//Áý°¥¾Ö¤Ð¤Ð¤Ì
