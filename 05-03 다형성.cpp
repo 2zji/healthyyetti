@@ -5,6 +5,14 @@ using namespace std;
 
 class Animal {
 public:
+	Animal(string name, unsigned int age, int leg_num)
+		: name_(name), age_(age), leg_num_(leg_num)
+	{
+		cout << "이름 " << name_ << endl;
+		cout << "나이 " << age_ << endl;
+		cout << "다리갯수 " << leg_num_ << endl;
+	}
+
 	virtual void walk(void)
 	{
 		cout << "걷다" << endl;
@@ -19,10 +27,6 @@ public:
 	{
 		cout << "먹다" << endl;
 	}
-
-	Animal(string name, unsigned int age, int leg_num)
-		: name_(name), age_(age), leg_num_(leg_num) {}
-
 private:
 	string name_;
 	unsigned int age_;
@@ -31,30 +35,24 @@ private:
 
 class Dog : public Animal {
 public:
-	Dog (string name, unsigned int age, int leg_num, int loyalty)
-		: Animal(name, age, leg_num), loyalty_(loyalty) {
-		cout << "충성도" << endl;
+	Dog(string name, unsigned int age, int leg_num, int loyalty)
+		: Animal(name, age, leg_num), loyalty_(loyalty)
+	{
+		cout << "충성도 " << endl;
 	}
-	//C++은 디폴트가 정적바인딩이기 때문에 가상함수로 오버라이딩 해야 한다
-	void bark() override {cout << "울프웊프" << endl;}
-	void eat() override {cout << "왕왕" << endl;}
-	void walk() override {cout << "척척촨촵" << endl;}
 
+	void bark() override { cout << "울프울프" << endl; }
+	void eat() override { cout << "왕~왕~" << endl; }
+	void walk() override { cout << "촵촵촵촵" << endl; }
 private:
 	int loyalty_;
 };
 
 void main(void)
 {
-	Animal* animal = new Animal("요아정", 8, 2);
-	animal->bark();
-	animal->eat();
-	animal->walk();
+
+	Animal* animal = new Dog("마루", 5, 2, 100);
+	//정적 바인딩으로 인해 Dog소멸자는 호출이 안됨
 	delete animal;
 
-	animal = new Dog("마루", 5, 2, 100);
-	animal->bark();
-	animal->eat();
-	animal->walk();
-	delete animal;
 }
