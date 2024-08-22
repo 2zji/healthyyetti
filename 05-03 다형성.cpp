@@ -5,17 +5,17 @@ using namespace std;
 
 class Animal {
 public:
-	void walk(void)
+	virtual void walk(void)
 	{
 		cout << "걷다" << endl;
 	}
 
-	void bark(void)
+	virtual void bark(void)
 	{
 		cout << "짖다" << endl;
 	}
 
-	void eat(void)
+	virtual void eat(void)
 	{
 		cout << "먹다" << endl;
 	}
@@ -36,15 +36,9 @@ public:
 		cout << "충성도" << endl;
 	}
 	//C++은 디폴트가 정적바인딩이기 때문에 가상함수로 오버라이딩 해야 한다
-	void bark() {
-		cout << "울프웊프" << endl;
-	}
-	void eat() {
-		cout << "왕왕" << endl;
-	}
-	void walk() {
-		cout << "척척촨촵" << endl;
-	}
+	void bark() override {cout << "울프웊프" << endl;}
+	void eat() override {cout << "왕왕" << endl;}
+	void walk() override {cout << "척척촨촵" << endl;}
 
 private:
 	int loyalty_;
