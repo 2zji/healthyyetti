@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿﻿#include <iostream>
 #include <string>
 
 using namespace std;
@@ -11,6 +11,11 @@ public:
 		cout << "이름 " << name_ << endl;
 		cout << "나이 " << age_ << endl;
 		cout << "다리갯수 " << leg_num_ << endl;
+	}
+
+	virtual ~Animal()
+	{
+		cout << "Animal 소멸자" << endl;
 	}
 
 	virtual void walk(void)
@@ -41,6 +46,11 @@ public:
 		cout << "충성도 " << endl;
 	}
 
+	virtual ~Dog()
+	{
+		cout << "Dog 소멸자" << endl;
+	}
+
 	void bark() override { cout << "울프울프" << endl; }
 	void eat() override { cout << "왕~왕~" << endl; }
 	void walk() override { cout << "촵촵촵촵" << endl; }
@@ -50,9 +60,8 @@ private:
 
 void main(void)
 {
-
 	Animal* animal = new Dog("마루", 5, 2, 100);
-	//정적 바인딩으로 인해 Dog소멸자는 호출이 안됨
+
 	delete animal;
 
 }
