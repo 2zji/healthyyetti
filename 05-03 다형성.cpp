@@ -1,4 +1,4 @@
-﻿﻿#include <iostream>
+﻿#include <iostream>
 #include <string>
 
 using namespace std;
@@ -18,20 +18,11 @@ public:
 		cout << "Animal 소멸자" << endl;
 	}
 
-	virtual void walk(void)
-	{
-		cout << "걷다" << endl;
-	}
+	//순수 가상 함수 쓰기
+	virtual void walk(void) = 0;
+	virtual void bark(void) = 0;
+	virtual void eat(void) = 0;
 
-	virtual void bark(void)
-	{
-		cout << "짖다" << endl;
-	}
-
-	virtual void eat(void)
-	{
-		cout << "먹다" << endl;
-	}
 private:
 	string name_;
 	unsigned int age_;
@@ -60,7 +51,9 @@ private:
 
 void main(void)
 {
+	//추상클래스는 객체를 생성할 수 없다(new Animal() 불가)
 	Animal* animal = new Dog("마루", 5, 2, 100);
+	animal->bark();
 
 	delete animal;
 
