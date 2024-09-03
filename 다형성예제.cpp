@@ -1,80 +1,149 @@
-#include<iostream>
-#include<string>
+ï»¿ï»¿#include <iostream>
+#include <string>
+#include <stdlib.h>
 
 using namespace std;
 
 class Food {
 public:
-	Food(int civil, int force, string name, int territory) 
+	Food(int civil, int force, string name, int territory)
 		: civil_(civil), force_(force), name_(name), territory_(territory)
-	{}
-
-	virtual void show() {
-		Food::show();
-		cout << "±¹¹Î ¼ö : " << civil_ << endl;
-		cout << "±º·Â : " << force_ << endl;
-		cout << "ÀÌ¸§ : " << name_ << endl;
-		cout << "¸éÀû : " << territory_ << endl;
+	{
 	}
 
-private:
-	int civil_;		//±¹¹Î ¼ö
-	int force_;		//±¹·Â
-	string name_;	//ÀÌ¸§
-	int territory_;	//¶¥(¸éÀû)
+	virtual void show()
+	{
+		cout << "êµ­ë¯¼ ìˆ˜ : " << civil_ << endl;
+		cout << "êµ°ë ¥ : " << force_ << endl;
+		cout << "ì´ë¦„ : " << name_ << endl;
+		cout << "ë©´ì  : " << territory_ << endl;
+	}
+
+	virtual void attack(Food* target) = 0;
+
+	int civil_;		// êµ­ë¯¼ ìˆ˜
+	int force_;		// êµ°ë ¥ : 0ì´ ë˜ë©´ ë©¸ë§
+	string name_;	// ì´ë¦„
+	int territory_;	// ë•…(ë©´ì )
 };
 
 class Kimchi : public Food {
 public:
-	Kimchi(int civil, int force, string name, int territory, int garlic, int pepper) 
+	Kimchi(int civil, int force, string name, int territory, int garlic, int pepper)
 		: Food(civil, force, name, territory), garlic_(garlic), pepper_(pepper)
 	{}
-	void show() {
+
+	void show()
+	{
 		Food::show();
-		cout << "¸¶´Ã : " << garlic_ << endl;
-		cout << "°íÃß : " << pepper_ << endl;
+		cout << "ë§ˆëŠ˜ : " << garlic_ << endl;
+		cout << "ê³ ì¶” : " << pepper_ << endl;
 	}
-private:
+
+	void attack(Food* target) override
+	{
+		target->force_ -= this->force_ * 2;
+	}
+
 	int garlic_;
-	int pepper_;	//ÇÑ±ÛÀÇ Èû
+	int pepper_;		// í•œê¸€ì˜ í˜
 };
 
 class Jelly : public Food {
 public:
-	Jelly(int civil, int force, string name, int territory, int jelatin, int suger) 
-		: Food(civil, force, name, territory), jelatin_(jelatin), suger_(suger)
+	Jelly(int civil, int force, string name, int territory, int gelatin, int sugar)
+		: Food(civil, force, name, territory), gelatin_(gelatin), sugar_(sugar)
 	{}
-	void show() {
+
+	void show()
+	{
 		Food::show();
-		cout << "Á©¶óÆ¾ : " << jelatin_ << endl;
-		cout << "¼³ÅÁ : " << suger_ << endl;
+		cout << "ì ¤ë¼í‹´ : " << gelatin_ << endl;
+		cout << "ì„¤íƒ• : " << sugar_ << endl;
 	}
-private:
-	int jelatin_;
-	int suger_;	//¼³ÅÁÀÇ Èû
+
+	void attack(Food* target) override
+	{
+		target->force_ += this->force_;
+	}
+	int gelatin_;
+	int sugar_;		// ì„¤íƒ•ì˜ í˜
 };
 
 class Cheese : public Food {
 public:
-	Cheese(int civil, int force, string name, int territory, int milk, int Rennet)
-		: Food(civil, force, name, territory), milk_(milk), Rennet_(Rennet)
+	Cheese(int civil, int force, string name, int territory, int milk, int rennet)
+		: Food(civil, force, name, territory), milk_(milk), rennet_(rennet)
 	{}
-	void show() {
-		Food::show();
-		cout << "¿ìÀ¯ : " << milk_ << endl;
-		cout << "ÀÀ°íÁ¦ : " << Rennet_ << endl;
+
+	void attack(Food* target) override
+	{
+		target->force_ += this->force_ / 3;
 	}
-private:
+
+	void show()
+	{
+		Food::show();
+		cout << "ìš°ìœ  : " << milk_ << endl;
+		cout << "ì‘ê³ ì œ : " << rennet_ << endl;
+	}
+
 	int milk_;
-	int Rennet_;	//ÀÀ°íÁ¦
+	int rennet_;	// ì‘ê³ ì œ
 };
 
-void main(void) {
-	Food* player = new Kimchi(15, 95, "°«±èÄ¡", 86, 100, 100);
-	Food* friends = new Cheese(100, 20, "Â¥°èÄ¡", 100, 20, 100);
 
-	player->show();
-	friends->show();
+void main(void)
+{
+	Food* player = new Kimchi(15, 95, "ê°“ê¹€ì¹˜", 86, 100, 100);
+	Food* friends = new Cheese(100, 20, "ì§œê³„ì¹˜", 100, 20, 100);
+
+	while (true)
+	{
+		system("cls");
+		cout << "â˜…ë‚˜â˜…" << endl;
+		player->show();
+
+		cout << endl << endl;
+		cout << "â˜…ìƒëŒ€ë°©â˜…" << endl;
+		friends->show();
+
+		cout << "-------------------------------" << endl;
+
+		int select;
+		cout << "1. ê³µê²©" << endl;
+		cout << "2. íŠ¹ìˆ˜1" << endl;
+		cout << "3. íŠ¹ìˆ˜2" << endl;
+		cout << "4. ë°©ì–´" << endl;
+
+
+		cin >> select;
+		switch (select)
+		{
+		case 1:
+			//TODO : ê³µê²©
+			cout << "ê³µê²©" << endl;
+			player->attack(friends);
+			break;
+		case 2:
+			//TODO : íŠ¹ìˆ˜1
+			cout << "íŠ¹ìˆ˜1" << endl;
+			break;
+		case 3:
+			//TODO : íŠ¹ìˆ˜2
+			cout << "íŠ¹ìˆ˜2" << endl;
+			break;
+		case 4:
+			//TODO : ë°©ì–´
+			cout << "ë°©ì–´" << endl;
+			break;
+		default:
+			cout << "ë””í´íŠ¸" << endl;
+		}
+
+		system("pause");
+	}
+
 
 	delete friends;
 	delete player;
