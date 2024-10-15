@@ -12,6 +12,8 @@ void main(void) {
 	money["¼öºó"] = 30000000000;
 	money["¹Î¼±"] = 100;
 
+
+
 	//¹Ýº¹ÀÚ
 	//map<string, long long>::iterator iter;
 	for (auto iter = money.begin(); iter != money.end(); iter++)
