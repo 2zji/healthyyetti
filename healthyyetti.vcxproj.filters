@@ -69,5 +69,8 @@
     <ClCompile Include="09-02 범위기반 for문.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="09-02 outo.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
