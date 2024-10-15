@@ -1,13 +1,27 @@
+#include <stdio.h>
 #include <iostream>
-#include<vector>
+#include <map>
 
 using namespace std;
 
 void main(void) {
-	vector<string> v = { "롯데관광", "동화면세점", "제주드림타워", "마이데일리" };
+	map < string, long long > money;
 
-	for (auto str : v)
-		cout << str << endl;
+	//맵 추가
+	money["지수"] = 10000000000;
+	money["수빈"] = 30000000000;
+	money["민선"] = 100;
 
-	auto a = 30;
+	//반복자
+	//map<string, long long>::iterator iter;
+	for (auto iter = money.begin(); iter != money.end(); iter++)
+		cout << iter->first << "는 " << iter->second << endl;
+
+	//값 수정
+	money["민선"] = 10000000000;
+	cout << money["민선"] << endl;
+
+	//크기
+	cout << money.size() << endl;
+
 }
